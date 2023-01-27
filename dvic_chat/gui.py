@@ -125,11 +125,11 @@ class chatroom():
         self.app.exec_()
 
     def connect(self):
-        self.chatroom.widget.show()
         if self.ip == None or self.port == None or self.username == None:
             return
         self.client = client.DVICChatClient(address=self.ip, port=self.port, username=self.username)
-        self.client.connect()
+        if self.client.connect():
+            self.chatroom.widget.show()
 
     def sendMessage(self, message):
         if self.client == None:
