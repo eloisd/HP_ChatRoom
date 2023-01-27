@@ -7,7 +7,7 @@ from PyQt5.QtGui import QIcon, QFont, QCursor
 from PyQt5.QtCore import Qt, QCoreApplication, QThread, pyqtSignal, pyqtSlot, QTimer
 from PyQt5.QtNetwork import QTcpSocket, QHostAddress, QAbstractSocket
 
-import client as client
+import dvic_chat.client as client
 
 class paramSelectorWidget():
     #  this widgets is used to select the ip, port and username for the chatroom
@@ -144,9 +144,11 @@ class chatroom():
         if self.client.received_messages.empty():
             return
         message = self.client.received_messages.get()
-        message = str(message, "utf-8")
-        self.chatroom.messages.insertRow(0)
-        self.chatroom.messages.setItem(0, 0, QTableWidgetItem(message))
+        #  add message to chatroom at the botoom
+        self.chatroom.messages.insertRow(self.chatroom.messages.rowCount())
+        self.chatroom.messages.setItem(self.chatroom.messages.rowCount()-1, 0, QTableWidgetItem(message))
+        #  update scroll bar
+        self.chatroom.messages.scrollToBottom()
 
 if __name__ == "__main__":
     chatroom()
