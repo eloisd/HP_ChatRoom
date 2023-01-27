@@ -48,7 +48,7 @@ class DVICChatClient():
 
     def handle_console_input(self):
         while True:
-            inp = input()
+            inp = input().strip()
             print(f'\r{" "*len(inp)}')
             Packet2Message(inp).send(self.data_stream)
 

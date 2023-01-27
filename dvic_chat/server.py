@@ -56,11 +56,11 @@ class ChatClient():
     def set_client_name(self, name: str):
         self.username = name
 
-    def _handle_packet1_auth(self, pck):
+    def _handle_packet1_auth(self, pck: Packet1Auth):
         self.set_client_name(pck.name)
         self.server.broadcast(f'{self.name} has entered the chat')
 
-    def _handle_packet2_message(self, pck):
+    def _handle_packet2_message(self, pck: Packet2Message):
         if self.name == "unknown":
             print("!!! Client tried to send a message before authentication")
             self.socket.close()
