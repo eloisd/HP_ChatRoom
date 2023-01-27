@@ -33,7 +33,7 @@ class DVICChatClient():
                 pck_id = self.data_stream.receive_int()
                 if pck_id == 2:
                     p = Packet2Message().receive(self.data_stream)
-                    #print(p.message) # handle here
+                    print(p.message) # handle here
                     self.received_messages.put(p.message)
                 else:
                     print("Protocol error")
