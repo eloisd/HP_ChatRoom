@@ -2,8 +2,8 @@ import argparse
 import socket
 from threading import Thread
 import queue
-from protocol import DataStream, Packet1Auth, Packet2Message
 
+from dvic_chat.protocol import DataStream, Packet1Auth, Packet2Message
 class DVICChatClient():
     def __init__(self, address: str, port: int, username: str) -> None:
         self.username: str = username

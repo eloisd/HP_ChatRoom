@@ -63,7 +63,7 @@ class chatroomWidget():
         self.parent = parent
         self.widget = QWidget()
         self.widget.setWindowTitle("DVIC Chatroom")
-        self.widget.setWindowIcon(QIcon("dvic_chatroom.png"))
+        # self.widget.setWindowIcon(QIcon("dvic_chatroom.png"))
         self.widget.setFixedSize(800, 600)
 
         self.messages = QTableWidget()
