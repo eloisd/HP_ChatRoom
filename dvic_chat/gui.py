@@ -15,7 +15,7 @@ class paramSelectorWidget():
         self.parent = parent
         self.widget = QWidget()
         self.widget.setWindowTitle("DVIC Chatroom")
-        self.widget.setWindowIcon(QIcon("dvic_chatroom.png"))
+        # self.widget.setWindowIcon(QIcon("dvic_chatroom.png"))
         self.widget.setFixedSize(300, 200)
 
         self.ipLabel = QLabel("IP:")
@@ -143,7 +143,7 @@ class chatroom():
             return
         if self.client.received_messages.empty():
             return
-        message = self.client.queue.get()
+        message = self.client.received_messages.get()
         message = str(message, "utf-8")
         self.chatroom.messages.insertRow(0)
         self.chatroom.messages.setItem(0, 0, QTableWidgetItem(message))
