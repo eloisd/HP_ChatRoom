@@ -1,7 +1,8 @@
 import argparse
 import socket
 from threading import Thread
-from dvic_chat.protocol import DataStream, Packet1Auth, Packet2Message
+import queue
+from protocol import DataStream, Packet1Auth, Packet2Message
 
 class DVICChatClient():
     def __init__(self, address: str, port: int, username: str) -> None:
@@ -10,6 +11,8 @@ class DVICChatClient():
         self.socket: socket.socket = None
         self.address: str = address
         self.port: int = port
+        self.received_messages = queue.Queue(100)
+
 
     def connect(self):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,7 +33,8 @@ class DVICChatClient():
                 pck_id = self.data_stream.receive_int()
                 if pck_id == 2:
                     p = Packet2Message().receive(self.data_stream)
-                    print(p.message) # handle here
+                    #print(p.message) # handle here
+                    self.received_messages.put(p.message)
                 else:
                     print("Protocol error")
                     raise RuntimeError("Protocol Error")
